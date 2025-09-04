@@ -6,29 +6,33 @@ import (
 	"net/http"
 )
 
+// Define structure for JSON response.
 type Response struct {
 	Message string `json:"message"`
 	Status  int    `json:"status"`
 }
 
 func main() {
-	http.HandleFunc("/", handleRoot) // assign handler for root path ("/")
+	// Assign handler for root path.
+	http.HandleFunc("/", handleRoot)
 
 	fmt.Println("Server is running at localhost:8080")
-	http.ListenAndServe(":8080", nil) // start server on port 8080
+
+	// Start server on port 8080.
+	http.ListenAndServe(":8080", nil)
 }
 
-// define behaviour for requests to root path ("/")
+// Handle requests to the root path.
 func handleRoot(w http.ResponseWriter, r *http.Request) {
-	// create payload for response
+	// Create payload for response.
 	response := Response{
 		Message: "This is a test message.",
 		Status:  200,
 	}
 
-	// set header for json content type
+	// Set header for json content type.
 	w.Header().Set("Content-Type", "application/json")
 
-	// encode to JSON and send to client
+	// Encode response to JSON and send to client.
 	json.NewEncoder(w).Encode(response)
 }
