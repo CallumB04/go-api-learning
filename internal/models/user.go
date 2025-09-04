@@ -1,7 +1,7 @@
 package models
 
 type User struct {
-	ID       uint   `json:"id"`
+	ID       string `json:"id"`
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
@@ -12,7 +12,7 @@ type User struct {
 
 var TestUsers = []User{
 	{
-		ID:       1740047800381,
+		ID:       "1",
 		Username: "callum",
 		Email:    "thisisanemail@gmail.com",
 		Password: "Password123",
@@ -21,7 +21,7 @@ var TestUsers = []User{
 		Online:   true,
 	},
 	{
-		ID:       1740047800382,
+		ID:       "2",
 		Username: "testaccount",
 		Email:    "otheremail@gmail.com",
 		Password: "Password321",

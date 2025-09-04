@@ -8,4 +8,5 @@ import (
 func RegisterRoutes(mux *http.ServeMux) {
 	// User Routes
 	mux.Handle("GET /users", getUsers())
+	mux.Handle("GET /users/{id}", getUserByID())
 }
