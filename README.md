@@ -1,6 +1,6 @@
 # go-api-learning
 
-This is a simple REST API I am creating in Go. It is my first project using the Go programming language, and I am using it to help learn the language.
+A simple REST API written in Go. This is my first Go project, created as a way to learn the language.
 
 ## Installation and Setup
 
