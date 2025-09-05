@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/callumb04/playrates-backend-go/internal/api"
+	"github.com/callumb04/go-api-learning/internal/api"
 )
 
 func main() {

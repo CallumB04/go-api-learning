@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/callumb04/playrates-backend-go/internal/models"
-	"github.com/callumb04/playrates-backend-go/internal/util"
+	"github.com/callumb04/go-api-learning/internal/models"
+	"github.com/callumb04/go-api-learning/internal/util"
 )
 
 // Return all existing users.
