@@ -1,0 +1,16 @@
+[
+    {
+        "id": "1",
+        "email": "thisisanemail@gmail.com",
+        "username": "callum",
+        "bio": "This is a test bio",
+        "createdAt": "2025-09-05T12:34:56Z"
+    },
+    {
+        "id": "2",
+        "email": "otheremail@gmail.com",
+        "username": "testperson",
+        "bio": "",
+        "createdAt": "2025-09-05T12:34:56Z"
+    }
+]
