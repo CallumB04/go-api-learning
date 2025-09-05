@@ -6,6 +6,8 @@ import (
 
 // Register route handlers to mux.
 func RegisterRoutes(mux *http.ServeMux) {
+	// Root
+	mux.Handle("GET /", rootHandler())
 	// User Routes
 	mux.Handle("GET /users", getUsers())
 	mux.Handle("GET /users/{id}", getUserByID())
