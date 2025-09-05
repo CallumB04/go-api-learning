@@ -9,7 +9,7 @@ import (
 // Handle access to root of api
 func rootHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		util.JSONResponse(w, http.StatusOK, "Server is online")
+		util.MessageResponse(w, http.StatusOK, "Server is online")
 	})
 
 }

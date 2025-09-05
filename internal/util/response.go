@@ -16,6 +16,11 @@ func JSONResponse(w http.ResponseWriter, status int, data any) {
 	_ = json.NewEncoder(w).Encode(data)
 }
 
+// Send basic message response to client
+func MessageResponse(w http.ResponseWriter, status int, message string) {
+	JSONResponse(w, status, map[string]string{"message": message})
+}
+
 // Send Error response to client with provided http status and error message
 func ErrorResponse(w http.ResponseWriter, status int, message string) {
 	JSONResponse(w, status, map[string]string{"error": message})
