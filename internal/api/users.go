@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/callumb04/go-api-learning/internal/data"
 	"github.com/callumb04/go-api-learning/internal/util"
@@ -12,14 +13,17 @@ import (
 func getUsers() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		// Load users and return JSON to client
-		if users, err := data.LoadUsers(); err == nil {
-			util.JSONResponse(w, http.StatusOK, users)
+		// Load users from local JSON file.
+		users, err := data.LoadUsers()
+
+		// Return error to client if users fetch fails
+		if err != nil {
+			util.ErrorResponse(w, http.StatusInternalServerError, "Error fetching users")
 			return
 		}
 
-		// Return error to client if users fetch fails
-		util.ErrorResponse(w, http.StatusInternalServerError, "Error fetching users")
+		// Send users to client.
+		util.JSONResponse(w, http.StatusOK, users)
 
 	}
 }
@@ -27,25 +31,33 @@ func getUsers() http.HandlerFunc {
 // Return user that matches a provided ID.
 func getUserByID() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// Get user ID from request.
-		id := r.PathValue("id")
+		// Get user ID from request and remove whitespace
+		id := strings.TrimSpace(r.PathValue("id"))
 
-		// Load users to search with ID
-		if users, err := data.LoadUsers(); err == nil {
-
-			// Search for user with matching ID
-			for _, user := range users {
-				if user.ID == id {
-					util.JSONResponse(w, http.StatusOK, user)
-					return
-				}
-			}
-
-			// Return error if user does not exist
-			util.ErrorResponse(w, http.StatusNotFound, fmt.Sprintf("User not found. ID: %s", id))
+		// Return error if missing user ID.
+		if id == "" {
+			util.ErrorResponse(w, http.StatusBadRequest, "Missing user ID")
 			return
 		}
-		// Return error to client if users fetch fails
-		util.ErrorResponse(w, http.StatusInternalServerError, "Error fetching users")
+
+		users, err := data.LoadUsers()
+
+		if err != nil {
+			// Return error to client if users fetch fails.
+			util.ErrorResponse(w, http.StatusInternalServerError, "Error fetching users")
+			return
+		}
+
+		// Search for user with matching ID and return to client.
+		for _, user := range users {
+			if user.ID == id {
+				util.JSONResponse(w, http.StatusOK, user)
+				return
+			}
+		}
+
+		// Return error if user does not exist.
+		util.ErrorResponse(w, http.StatusNotFound, fmt.Sprintf("User not found. ID: %s", id))
+
 	}
 }
