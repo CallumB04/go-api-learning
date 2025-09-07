@@ -9,8 +9,8 @@ import (
 )
 
 // Return all existing users.
-func getUsers() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func getUsers() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 
 		// Load users and return JSON to client
 		if users, err := data.LoadUsers(); err == nil {
@@ -21,12 +21,12 @@ func getUsers() http.Handler {
 		// Return error to client if users fetch fails
 		util.ErrorResponse(w, http.StatusInternalServerError, "Error fetching users")
 
-	})
+	}
 }
 
 // Return user that matches a provided ID.
-func getUserByID() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+func getUserByID() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 		// Get user ID from request.
 		id := r.PathValue("id")
 
@@ -47,5 +47,5 @@ func getUserByID() http.Handler {
 		}
 		// Return error to client if users fetch fails
 		util.ErrorResponse(w, http.StatusInternalServerError, "Error fetching users")
-	})
+	}
 }
