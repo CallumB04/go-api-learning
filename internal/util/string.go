@@ -8,7 +8,7 @@ import (
 
 var (
 	ErrEmptyUsername    = errors.New("empty username")
-	ErrMultibyteFirst   = errors.New("multi-byte rune at first letter")
+	ErrMultibyteFirst   = errors.New("multi-byte rune at first character")
 	ErrInvalidUTF8First = errors.New("invalid utf-8 at first byte")
 )
 
@@ -22,8 +22,16 @@ func CapitalizeFirst(text string) (string, error) {
 		return "", ErrEmptyUsername
 	}
 
-	// Return input string if first letter is a multi-byte rune
-	if _, size := utf8.DecodeRuneInString(text); size > 1 {
+	// Decode first letter of input string into rune
+	firstRune, size := utf8.DecodeRuneInString(text)
+
+	// Invalid UTF-8 at the first byte of the string
+	if firstRune == utf8.RuneError && size == 1 {
+		return text, ErrInvalidUTF8First
+	}
+
+	// Multi-byte rune at the first character of the string
+	if size > 1 {
 		return text, ErrMultibyteFirst
 	}
 
