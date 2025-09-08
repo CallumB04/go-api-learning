@@ -32,7 +32,7 @@ func TestCapitalizeFirst(t *testing.T) {
 			// Pass test input into function
 			result, err := CapitalizeFirst(test.input)
 
-			// Fail test error received does not match the expected error
+			// Fail test if error received does not match the expected error.
 			if err != nil {
 
 				if err.Error() != test.expectedError.Error() {
@@ -40,7 +40,7 @@ func TestCapitalizeFirst(t *testing.T) {
 				}
 			}
 
-			// Fail test result does not match the expected value
+			// Fail test if result does not match the expected value.
 			if result != test.expected {
 				t.Errorf("CapitalizeFirst(%s) = %s; expected %s", test.input, result, test.expected)
 			}
