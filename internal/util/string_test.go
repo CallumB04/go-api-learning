@@ -1,7 +1,6 @@
 package util
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -13,8 +12,8 @@ func TestCapitalizeFirst(t *testing.T) {
 		expected      string
 		expectedError error
 	}{
-		{"empty", "", "", errors.New("empty username")},
-		{"empty space", " ", "", errors.New("empty username")},
+		{"empty", "", "", ErrEmptyUsername},
+		{"empty space", " ", "", ErrEmptyUsername},
 		{"single lower", "a", "A", nil},
 		{"single upper", "A", "A", nil},
 		{"word lower", "hello", "Hello", nil},
@@ -22,8 +21,8 @@ func TestCapitalizeFirst(t *testing.T) {
 		{"punctuation first", "!hello", "!hello", nil},
 		{"digit first", "1hello", "1hello", nil},
 		{"leading space", " hello", "Hello", nil},
-		{"multibyte first", "école", "école", errors.New("multi-byte rune at first letter")},
-		{"leading space and multibyte", " école", "école", errors.New("multi-byte rune at first letter")},
+		{"multibyte first", "école", "école", ErrMultibyteFirst},
+		{"leading space and multibyte", " école", "école", ErrMultibyteFirst},
 	}
 
 	// Iterate through unit tests.
@@ -34,6 +33,7 @@ func TestCapitalizeFirst(t *testing.T) {
 
 			// Fail test error received does not match the expected error
 			if err != nil {
+
 				if err.Error() != test.expectedError.Error() {
 					t.Errorf("expected error '%s'; got error '%s'", test.expectedError.Error(), err.Error())
 				}
