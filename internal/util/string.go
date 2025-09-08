@@ -12,5 +12,8 @@ func CapitalizeFirst(text string) string {
 		return ""
 	}
 
-	return strings.ToUpper(string(text[0])) + text[1:]
+	// Remove whitespace from input string.
+	textTrimmed := strings.TrimSpace(text)
+
+	return strings.ToUpper(string(textTrimmed[0])) + textTrimmed[1:]
 }
