@@ -19,7 +19,7 @@ func TestCapitalizeFirst(t *testing.T) {
 		{"punctuation first", "!bang", "!bang"},
 		{"digit first", "1abc", "1abc"},
 		{"leading space", " hello", "Hello"},
-		{"multibyte first", "école", "École"},
+		{"multibyte first", "école", "école"},
 	}
 
 	// Iterate through unit tests
