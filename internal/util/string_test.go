@@ -23,6 +23,7 @@ func TestCapitalizeFirst(t *testing.T) {
 		{"leading space", " hello", "Hello", nil},
 		{"multibyte first", "école", "école", ErrMultibyteFirst},
 		{"leading space and multibyte", " école", "école", ErrMultibyteFirst},
+		{"invalid utf8 first byte", string([]byte{0xff, 'a', 'b', 'c'}), string([]byte{0xff, 'a', 'b', 'c'}), ErrInvalidUTF8First},
 	}
 
 	// Iterate through unit tests.
