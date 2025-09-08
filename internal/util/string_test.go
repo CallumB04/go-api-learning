@@ -28,23 +28,21 @@ func TestCapitalizeFirst(t *testing.T) {
 
 	// Iterate through unit tests.
 	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			// Pass test input into function
-			result, err := CapitalizeFirst(test.input)
+		// Pass test input into function
+		result, err := CapitalizeFirst(test.input)
 
-			// Fail test if error received does not match the expected error.
-			if err != nil {
+		// Fail test if error received does not match the expected error.
+		if err != nil {
 
-				if err.Error() != test.expectedError.Error() {
-					t.Errorf("expected error '%s'; got error '%s'", test.expectedError.Error(), err.Error())
-				}
+			if err.Error() != test.expectedError.Error() {
+				t.Errorf("expected error '%s'; got error '%s'", test.expectedError.Error(), err.Error())
 			}
+		}
 
-			// Fail test if result does not match the expected value.
-			if result != test.expected {
-				t.Errorf("CapitalizeFirst(%s) = %s; expected %s", test.input, result, test.expected)
-			}
+		// Fail test if result does not match the expected value.
+		if result != test.expected {
+			t.Errorf("CapitalizeFirst(%s) = %s; expected %s", test.input, result, test.expected)
+		}
 
-		})
 	}
 }
