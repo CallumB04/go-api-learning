@@ -8,6 +8,8 @@ import (
 // Capitalize the first letter in a string.
 // Will ensure all usernames start with a capital letter.
 func CapitalizeFirst(text string) string {
+	// Remove whitespace from input string.
+	text = strings.TrimSpace(text)
 
 	if text == "" {
 		return ""
@@ -18,8 +20,5 @@ func CapitalizeFirst(text string) string {
 		return text
 	}
 
-	// Remove whitespace from input string.
-	textTrimmed := strings.TrimSpace(text)
-
-	return strings.ToUpper(string(textTrimmed[0])) + textTrimmed[1:]
+	return strings.ToUpper(string(text[0])) + text[1:]
 }
