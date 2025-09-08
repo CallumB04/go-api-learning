@@ -12,6 +12,7 @@ func TestCapitalizeFirst(t *testing.T) {
 		expected string
 	}{
 		{"empty", "", ""},
+		{"empty space", " ", ""},
 		{"single lower", "a", "A"},
 		{"single upper", "A", "A"},
 		{"word lower", "hello", "Hello"},
@@ -20,6 +21,7 @@ func TestCapitalizeFirst(t *testing.T) {
 		{"digit first", "1abc", "1abc"},
 		{"leading space", " hello", "Hello"},
 		{"multibyte first", "école", "école"},
+		{"leading space and multibyte", " école", "école"},
 	}
 
 	// Iterate through unit tests
